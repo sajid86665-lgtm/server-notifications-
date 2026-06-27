@@ -1,35 +1,74 @@
 require "import"
 import "android.widget.*"
-local dlg = LuaDialog()
-dlg.setTitle("experiment")
-local layout = {
-LinearLayout;
-orientation = "vertical";
-padding = "30dp";
-{
-Button;
-text = "Developer mezab ali";
-textSize = "16sp";
-layout_marginBottom = "15dp";
-onClick = function()
-end;
-};
-{
-Button;
-text = "About";
-textSize = "16sp";
-layout_marginBottom = "15dp";
-onClick = function()
-end;
-};
-{
-Button;
-text = "Exit";
-textSize = "16sp";
-onClick = function()
-dlg.dismiss()
-end;
-};
+import "com.androlua.*"
+import "android.content.Intent"
+import "android.net.Uri"
+import "android.graphics.Typeface"
+
+-- Play tick sound at the beginning
+service.playSoundTick()
+
+-- Layout with heading + GridView
+layout = {
+    LinearLayout,
+    orientation = "vertical",
+    layout_width = "fill",
+    layout_height = "fill",
+    {
+        TextView,
+        id = "notificationHeading",
+        text = "new version coming soon",
+        textSize = 20,
+        gravity = "center",
+        layout_width = "fill",
+        layout_height = "wrap",
+        padding = "16dp",
+    },
+    {
+        GridView,
+        id = "grid",
+        numColumns = 1,
+        layout_width = "fill",
+        layout_height = "fill",
+    }
 }
-dlg.setView(loadlayout(layout))
+
+-- Items now match the command strings exactly (no exclamation marks)
+items = {"Previous media", "Rewind", "Play or pause", "Fast forward", "Next media"}
+
+-- Create and configure the dialog
+dlg = LuaDialog(this)
+dlg.View = loadlayout(layout)
+
+-- Apply bold style to the heading
+notificationHeading.setTypeface(notificationHeading.getTypeface(), Typeface.BOLD)
+
+grid.adapter = SingleLineAdapter(service, String(items))
+dlg.setTitle("Media Player Manager")
+
+-- Buttons
+dlg.setButton2("Join Telegram Channel", function()
+    local url = "https://t.me/blindtechhubq7c"
+    local intent = Intent(Intent.ACTION_VIEW)
+    intent.setData(Uri.parse(url))
+    this.startActivity(intent)
+end)
+dlg.setButton("Close", nil)
+
 dlg.show()
+
+-- Handle item clicks using the new syntax
+grid.onItemClick = function(l, v)
+    task(500, function()
+        service.playSoundTick()
+        
+        -- Execute the command directly from the clicked text
+        if service.execute(v.text) then
+            service.speak("Executed!")
+        else
+            print("audio aur video not Playing!, please play any media!")
+        end
+        
+        return true
+    end)
+end
