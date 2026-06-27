@@ -1,14 +1,14 @@
 require "import"
 import "android.widget.*"
 local dlg = LuaDialog()
-dlg.setTitle("Tech For V I")
+dlg.setTitle("experiment")
 local layout = {
 LinearLayout;
 orientation = "vertical";
 padding = "30dp";
 {
 Button;
-text = "Developer Sabir Jamil";
+text = "Developer mezab ali";
 textSize = "16sp";
 layout_marginBottom = "15dp";
 onClick = function()
