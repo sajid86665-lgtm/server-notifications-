@@ -17,7 +17,7 @@ layout = {
     {
         TextView,
         id = "notificationHeading",
-        text = "which features do you need in the next update contact on  9118141191 note only do messages called not received ",
+        text = "what's new now 🤔? now if you can press any button service dot speak executed will be removed ",
         textSize = 20,
         gravity = "center",
         layout_width = "fill",
@@ -64,7 +64,7 @@ grid.onItemClick = function(l, v)
         
         -- Execute the command directly from the clicked text
         if service.execute(v.text) then
-            service.speak("Executed!")
+            
         else
             print("audio aur video not Playing!, please play any media!")
         end
