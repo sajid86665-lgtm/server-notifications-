@@ -17,7 +17,7 @@ layout = {
     {
         TextView,
         id = "notificationHeading",
-        text = "which features do you need in the next updatecontact on  9118141191 note only do messages called not received ",
+        text = "which features do you need in the next update contact on  9118141191 note only do messages called not received ",
         textSize = 20,
         gravity = "center",
         layout_width = "fill",
@@ -44,7 +44,7 @@ dlg.View = loadlayout(layout)
 notificationHeading.setTypeface(notificationHeading.getTypeface(), Typeface.BOLD)
 
 grid.adapter = SingleLineAdapter(service, String(items))
-dlg.setTitle("Media Player Manager")
+dlg.setTitle("Media Player tool")
 
 -- Buttons
 dlg.setButton2("Join Telegram Channel", function()
